@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e9T9hXmJ58bldgTk+" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-xnfnlURgeYEsG1Diz/2uN9bG7va6FQfH9Jf5eUklUZwLfGx2QnkqKT3eOHD6vtrq" crossorigin="anonymous">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <title>DashBoard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Pacifico', cursive;
+            font-size: 11px;
+            background-color: #EEF4ED;
+            color: #fff; 
+        }
+
+        .dashboard-container {
+            display: flex;
+        }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .profile-section {
+            width: 15%;
+            background-color: #134074;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 1500px;
+            text-align: center;
+            display: flex;
+            
+        }
+         
+
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 10px; 
+            text-align: center;
+            margin: -70px; 
+            
+        }
+        .icon-container div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .icon-container div i {
+            font-size: 30px;
+
+        }
+        .icon-container div:nth-child(1) i {
+            margin-top: 120px;
+            color:#ffffff;
+        }
+        .icon-container div:nth-child(2) i {
+            color: #ffffff;
+        }
+        .icon-container div:nth-child(3) i {
+            color:#ffffff;
+        }
+        .icon-container div:nth-child(4) i {
+            color: #ffffff;
+        }
+        .icon-container div:nth-child(5) i {
+            color: #ffffff;
+        }
+        .icon-container div:hover {
+            transform: scale(1.1);
+           
+            
+        }
+        .icon-container div:hover i {
+            color: #7d9dbd; 
+        }
+        .icon-container div {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .icon-container div.active i {
+            color: #7a9cbd;
+        }
+        .company-logo {
+            margin-right: 10px; 
+            
+        }
+        .company-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -5px;
+        }
+        .letter-blue { color: #ffffff; }
+        .letter-red { color: #ffffff; }
+        .letter-yellow { color: #ffffff; }
+        .letter-green { color: #ffffff; }
+        .letter-purple { color: #ffffff; }
+        .letter-orange { color: #ffffff; }
+        .letter-pink { color: #ffffff; }
+        .letter-teal { color: #ffffff; }
+
+        .additional-content {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .additional-content img {
+            width: 150px; 
+            height: auto; 
+            border-radius: 10px;
+            margin-left : -20px
+        }
+
+        .additional-content p {
+            color: #ffffff; 
+        }
+
+        .get-started-button {
+            background-color: #0B2545; 
+            color: #fff; 
+            padding: 10px 40px; 
+            border: none; 
+            border-radius: 20px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            margin-top: 15px; 
+        }
+
+        .get-started-button:hover {
+            background-color: #5E35B1; 
+        }
+        .dashboard-section {
+            width: 75%;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 1050px;
+            
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #3498db;
+            margin: 20px auto;
+            transition: transform 0.3s ease-in-out; 
+            background-image: url('static/images/edit.jpg');
+            background-size: cover; 
+            background-position: center; 
+        }
+        .profile-pic:hover {
+            transform: scale(1.2);
+        }
+      
+        .content-section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .content-section:hover {
+            background-color: #dcdcdc; 
+        }
+        .row {
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 25px;
+        }
+        .row .card {
+            margin-top: 20px;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            background-color: #ffffff;
+        }
+        .table th {
+            font-weight: bold;
+            background-color: #ffffff;
+        }
+        .table td, .table th {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .badge {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+        .badge-gradient-success {
+            background-color:#0B2545 ;
+            color: #fff;
+            border: none;
+            padding: 10px 33px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .badge-gradient-warning {
+            background-color:#0B2545 ;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .badge-gradient-info {
+            background-color:#0B2545 ;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .badge-gradient-danger {
+            background-color:#0B2545 ;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .card {
+            border: 1px solid #e1e5eb;
+            border-radius: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .table img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .large-card,
+        .small-card {
+            border-radius: 10px;
+            padding: 15px; 
+            box-sizing: border-box;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .large-card {
+            position: relative;
+            flex: 0 0 70%; 
+            margin-right: 20px; 
+            background-color: #13315C;
+            color: #ffffff;
+           
+        }
+        .header-image {
+            position: absolute;
+            top: 98px; 
+            right: 40px; 
+            width: 250px; 
+            height: 250px; 
+            border-radius: 15px;
+            background-color: #3498db;
+            overflow: hidden;
+            transform: translate(0, -50%); 
+            
+        }
+        .small-card {
+            flex: 0 0 30%;
+            
+            background-color: #0B2545;
+            color: #ffffff;
+            align-items: center; 
+            justify-content: center; 
+            
+        }
+        .percentage {
+            font-size: 24px;
+            color: #3498db;
+            
+        }
+        .graph-container {
+            width: 400px;
+            height: 450px;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .graph {
+            display: inline-block;
+            width: 150px;
+            height: 80px;
+            margin-top: 13px;
+        }
+        .doughnut-container {
+            width: 370px;
+            height: 450px;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .graph-container h3,
+        .doughnut-container h3 {
+            margin-top: -1px; 
+        }
+
+        .doughnut-graph-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: black;
+            flex-wrap: wrap;
+        }
+
+        .info-container {
+            text-align: center; 
+        }
+        .info-container h3 {
+            color: white; 
+        }
+
+        .info-container p {
+            color: rgb(255, 255, 255); 
+        }
+        
+        
+        .contact-icons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+
+        .message-button {
+            background-color: #8DA9C4;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .message-button i {
+            margin-right: 5px; 
+        }
+
+        .call-icon {
+            font-size: 24px;
+            color: #8DA9C4;
+            margin-right: 5px;
+        }
+        .try-now-button {
+            background-color: #fff;
+            color: #3498db;
+            padding: 10px 15px;
+            border: 2px solid #3498db;
+            border-radius: 20px; 
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            margin-left: -450px;
+        }
+        .try-now-button:hover {
+            background-color: #8DA9C4;
+            color: #fff;
+        }
+        .chatbox {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            background-color: #faf6f6;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .chat-header {
+            background-color: #6884e0;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .input-container button {
+            padding: 8px;
+            margin-left: 8px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ccc;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .close-button:hover {
+            background-color: #aaa;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            color: black;
+        }
+
+        #welcomeDate {
+            margin-left: 10px;
+            font-size: 16px;
+            color: #574e4e;
+        }
+
+        .animated-smiley {
+            font-size: 40px;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .profile1-section {
+            width: 25%;
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 1500px;
+            text-align: center;
+            transition: background-color 0.3s ease-in-out;
+            margin-left: 20px;
+            text-align: center;
+            padding-top: 40px; 
+            display: block;
+            
+        }
+        .search-bar {
+            position: absolute;
+            top: 20px; 
+            right: 20px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 8px;
+        }
+
+        .search-icon {
+            font-size: 20px; 
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .search-icon:hover {
+            transform: scale(1.2); 
+        }
+
+        .profile1-section img {
+            padding-top: 30px;
+            width: 200px; 
+            height: 200px; 
+            border-radius: 10px; 
+            display: block; 
+            margin: 0 auto; 
+        }
+
+        .profile-info {
+            color: #3498db; 
+            margin-top: 20px;
+        }
+
+        .profile-info h2 {
+            margin: 22px;
+            font-weight: bold; 
+            color: black; 
+            margin-left: 50px;
+        }
+
+        .profile-info p {
+            margin: 5px 0; 
+            color: black;
+        }
+
+        
+        .scheduler-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fdfcfc;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .scheduler-container h3 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #010305;
+        }
+
+        .scheduler-card {
+            background-color: #EEF4ED;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .scheduler-card .card-content {
+            padding: 10px;
+        }
+
+        .scheduler-card .topic {
+            font-size: 18px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .scheduler-card .event-button {
+            background-color: #13315C;
+            color: #fff;
+            padding: 3px 50px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .scheduler-card .website-link {
+            color: #060108;
+            font-size: 15px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .scheduler-card .website-link i {
+            margin-right: 5px;
+        }
+
+        .scheduler-card .calendar-icon {
+            font-size: 16px;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .scheduler-card .date {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .scheduler-card .scrolling-line {
+            width: 100%;
+            height: 2px;
+            background-color: #8DA9C4;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 10px 10px;
+            cursor: ew-resize;
+            margin-top: 135px;
+            transition: background-color 0.3s, width 0.3s;
+        }
+        .scheduler-card .round-indicator {
+            position: absolute;
+            width: 20px; 
+            height: 20px; 
+            background-color: #134074;
+            border-radius: 50%;
+            left: 0;
+            top: -9px; 
+            cursor: grab;
+            transition: left 0.3s;
+        }
+        .scheduler-card .scrolling-line:hover {
+            background-color: #2980b9;
+        }
+
+
+        .scheduler-card .event-button,
+        .scheduler-card .website-link,
+        .scheduler-card .date {
+            margin-left: 20px; 
+        }
+
+        .time-indicator {
+            position: absolute;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .time-indicator.top-left {
+            top: 10px;
+            left: -10px;
+            
+        }
+
+        .time-indicator.bottom-left {
+            bottom: 10px;
+            left: -10px;
+        }
+        
+
+        
+
+        .close {
+            color: #ad0808;
+            position: absolute;
+            top: -50px;
+            right:60px;
+            
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+        
+        .toggle-container {
+            position: relative;
+           
+            
+        }
+
+        .toggle-profile {
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            background-color: #134074;
+            color: #fff;
+            padding: 8px;
+            border-radius: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1060px;
+            margin-right: 1000px;
+        }
+
+       
+        .profile1-section.hidden {
+            display: none;
+        }
+        
+
+        .toggle-profile i {
+            font-size: 18px;
+            
+        }
+        .card-footer {
+            margin-top: 20px;
+            text-align: center;
+        }   
+        .filter {
+            position: relative;
+            display: inline-block;
+        }
+
+        .icon {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            z-index: 1;
+        }
+
+
+        .budget {
+            max-width: 500px;
+            margin: 20px;
+            ;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: black;
+        }
+
+        .echart {
+            min-height: 600px;
+            
+        }
+
+
+
+
+        @media screen and (min-width: 576px) and (max-width: 767px) {
+            .profile-section {
+                width: 100%;
+            }
+
+            .dashboard-section {
+                width: 100%;
+            }
+            .profile1-section {
+                width: 100%;
+            }
+
+            .search-bar {
+                    position: absolute;
+                    top: 20px; 
+                    right: 20px; 
+                    display: flex;
+                    align-items: center;
+                }
+
+                .container{
+                    margin-left: 0;
+                    width: 20px;
+                }
+
+            
+            
+        }
+
+
+        @media screen and (max-width: 575px) {
+            .dashboard-container {
+                        flex-direction: column; 
+                        overflow-x: hidden;
+                          
+                    }
+                    .profile-section {
+                        display: none;
+                    }
+                    .profile-section,
+                    .dashboard-section,
+                    .profile1-section {
+                        width: 100%;
+                    }
+
+
+                .search-bar {
+                    display: none;
+                }
+
+                #mobileMenuIcon {
+                    display: block;
+                    text-align: right;
+                    padding: 10px;
+                    cursor: pointer;
+                    color: rgb(7, 6, 104);
+                    font-size: 24px;
+                }
+
+            
+            
+                .icon-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30px;
+                    margin-top: 10px; 
+                    text-align: center;
+                    margin: -70px; 
+                    
+                }
+                .icon-container div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+                
+
+                .icon-container div i {
+                    font-size: 30px;
+
+                }
+
+
+                .card-container {
+                    font-size: 8px;
+                }
+                
+                .header-image {
+                    position: absolute;
+                    top: 60px; 
+                    right: 10px; 
+                    width: 100px; 
+                    height: 150px; 
+        
+                }
+
+                .table td, .table th {
+                    padding: 0.36rem; 
+                }
+
+                .badge {
+                    padding: 0.5rem 0.75rem;
+                    font-size: 0.55rem;
+                    font-weight: 700;
+                }
+
+                .badge-gradient-success,
+                .badge-gradient-warning,
+                .badge-gradient-info,
+                .badge-gradient-danger {
+                    padding: 10px 0px;
+                }
+
+                .profile1-section {
+                    margin-top: 820px;
+                    margin-left: 0; 
+                    margin-right: 0;
+                   
+                }
+
+                .toggle-profile {
+                    margin-left: 10px; 
+                    margin-right: 10px; 
+                }
+
+                .toggle-profile i {
+                    font-size: 16px;
+                }
+
+                .large-card {
+                    position: relative;
+                    flex: 0 0 60%; 
+                    
+                    margin-left: -10px;
+                    
+                    
+                }
+                .small-card {
+                   
+                    margin-left: -17px; 
+                    
+                    
+                }
+                .container{
+                    margin-left: 0;
+                    width: 20px;
+                }
+
+                
+                
+        }
+        @media screen and (min-width: 576px) {
+            .doughnut-container .short-labels {
+                display: none;
+            }
+        }
+
+
+        @media screen and (max-width: 575px) {
+            .doughnut-container .full-labels {
+                display: none;
+            }
+            .container{
+                    margin-left: 0;
+                    width: 20px;
+                }
+        }
+
+</style>
+
+<style>
+    /* body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #134074;
+} */
+.container{
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    height: auto;
+    margin: 0 15px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+.container header{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.container header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+
+}
+.container form{
+    position: relative;
+    margin-top: 16px;
+    min-height: 490px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.container form .form{
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3 ease;
+}
+.container form .form.second{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+form.secActive .form.second{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+form.secActive .form.first{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+}
+.container form .title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
+.container form .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+form .fields .input-field{
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+.input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+
+}
+.input-field input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.input-field input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.input-field input[type="date"]{
+    color: #707070;
+}
+.input-field input[type="date"]:valid{
+    color: #333;
+}
+.container form button, .backBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    /* margin: 25px o; */
+    background-color: #134074;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container form button,
+.container form .backBtn{
+    font-size: 14px;
+    font-weight: 400;
+}
+form button:hover{
+    background-color: #265df2;
+}
+form button i,
+form .backBtn{
+    margin: 0 6px;
+}
+form .backBtn i{
+    transform: rotate(180deg);
+}
+form .buttons{
+    display: flex;
+    align-items: center;
+}
+form .buttons button, .backBtn{
+    margin-right: 14px;
+}
+
+@media (max-width: 750px) {
+    .container {
+        /* overflow-y: scroll; */
+        margin-left: -10%;
+    }
+    .container form{
+        overflow-y: scroll;
+        /* margin-left: -10%; */
+    }
+    .container form::-webkit-scrollbar{
+        display: none;
+        margin-left: -10%;
+    }
+    form .fields .input-field{
+        width: calc(100% / 2 - 15px);
+    }  
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field{
+        width: 70%;
+    }  
+    .container {
+        /* overflow-y: scroll; */
+        margin-left: -10%;
+    }
+}
+</style>
+    </style>
+</head>
+
+<body>
+   
+    <div class="dashboard-container">
+        <div id="mobileMenuIcon" onclick="toggleMobileMenu()">
+            <i class="bi bi-list"></i>
+        </div>
+        <script>
+            function toggleMobileMenu() {
+                var profileSection = document.querySelector('.profile-section');
+        
+                if (profileSection.style.display === 'none' || profileSection.style.display === '') {
+                    profileSection.style.display = 'block';
+                } else {
+                    profileSection.style.display = 'none';
+                }
+            }
+
+            window.onload = function() {
+               
+                if (window.innerWidth <= 575) {
+                    var profileSection = document.querySelector('.profile-section');
+                    profileSection.style.display = 'none'; 
+                }
+            };
+        </script>
+      
+        
+        <div class="profile-section" id="profileSection">
+            <div class="company-logo">
+                <img src="{% static 'images/icon.jpg' %}" alt="Company Logo" style="width: 80px; height: 80px;">
+            </div>
+            <div class="company-name">
+                <span class="letter-blue">C</span>
+                <span class="letter-red">R</span>
+                <span class="letter-yellow">M</span>
+                <span class="letter-green">S</span>
+                <span class="letter-purple">y</span>
+                <span class="letter-orange">s</span>
+                <span class="letter-pink">t</span>
+                <span class="letter-teal">e</span>
+                <span class="letter-teal">m</span>   
+            </div>
+            <div class="icon-container">
+                <div id="homeIcon"  onclick="chooseIcon(this)" class="active">
+                    <i class="bi bi-grid"></i> 
+                </div>
+                <div onclick="chooseIcon(this)">
+                    <i class="bi bi-journal-text"></i> 
+                </div>
+                <div onclick="chooseIcon(this)">
+                    <a href="{% url 'form' %}" ><i class="bi bi-file-text"></i>
+                    </a> 
+                </div>
+                <div onclick="chooseIcon(this)">
+                    <a href="{% url 'mydata' %}" ><i class="bi bi-card-list"></i> </a> 
+                </div>
+                <div onclick="chooseIcon(this)">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                </div>   
+            </div>
+            
+            
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="additional-content">
+                <img src="{% static 'images/gh.png' %}" alt="Additional Image" style="width: 200px; height: 200px;">
+                <p>Explore the power of CRM for better customer relationships.</p>
+                <button class="get-started-button">Learn More</button>
+            </div>
+            </div>
+            
+            <div class="container" style="margin-left:10%;margin-top: 10%;height: 550px;">
+                <header>Registration</header>
+        
+                <form action="submit">
+                    <div class="form first">
+                        <div class="details personal">
+                            <span class="title">Personal Details</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Enter your name" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Date of Birth</label>
+                                    <input type="date" placeholder="Enter birth date" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Email</label>
+                                    <input type="email" placeholder="Enter your email" id="email" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Mobile Number</label>
+                                    <input type="number" placeholder="Enter mobile number" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Gender</label>
+                                    <input type="date" placeholder="Enter your gender" required>
+                                </div>
+                                
+                                <div class="input-field">
+                                    <label>Occupation</label>
+                                    <input type="text" placeholder="Enter your ccupation" required>
+                                </div>
+        
+                            </div>
+                        </div>
+        
+        
+                        <div class="details ID">
+                            <span class="title">Identity Details</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>ID Type</label>
+                                    <input type="text" placeholder="Enter ID type" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>ID Number</label>
+                                    <input type="number" placeholder="Enter ID number" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Issued Authority</label>
+                                    <input type="text" placeholder="Enter issued authority" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Issued State</label>
+                                    <input type="text" placeholder="Enter issued state" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Issued Date</label>
+                                    <input type="date" placeholder="Enter issued date" required>
+                                </div>
+                                
+                                <div class="input-field">
+                                    <label>Expiry Date</label>
+                                    <input type="date" placeholder="Enter expiry date" required>
+                                </div>
+                            </div>
+                            <button class="nextBtn">
+                                <span class="btnText">Next</span>
+                                <i class="uil uil-navigator"></i>
+                            </button>
+                        </div>
+                    </div>
+        
+                    <div class="form second">
+                        <div class="details address">
+                            <span class="title">Address Details</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Address Type</label>
+                                    <input type="text" placeholder="Enter address type" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Nationality</label>
+                                    <input type="date" placeholder="Enter nationality" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>State</label>
+                                    <input type="text" placeholder="Enter your state" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>District</label>
+                                    <input type="text" placeholder="Enter your district" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Block Number</label>
+                                    <input type="number" placeholder="Enter block number" required>
+                                </div>
+                                
+                                <div class="input-field">
+                                    <label>Ward Number</label>
+                                    <input type="text" placeholder="Enter ward number" required>
+                                </div>
+        
+                            </div>
+                        </div>
+        
+        
+                        <div class="details family">
+                            <span class="title">Family Details</span>
+        
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Father Name</label>
+                                    <input type="text" placeholder="Enter father name" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Mother Name</label>
+                                    <input type="text" placeholder="Enter mother name" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Grand Father</label>
+                                    <input type="text" placeholder="Enter grandfther name" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Spouse Name</label>
+                                    <input type="text" placeholder="Enter spouse name" required>
+                                </div>
+        
+                                <div class="input-field">
+                                    <label>Father in Law</label>
+                                    <input type="text" placeholder="Father in law name" required>
+                                </div>
+                                
+                                <div class="input-field">
+                                    <label>Mother in Law</label>
+                                    <input type="text" placeholder="Mother in law name" required>
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <div class="backBtn">
+                                    <i class="uil uil-navigator"></i>
+                                    <span class="btnText">Back</span>
+                                </div>
+        
+                                <button class="submit">
+                                    <span class="submit">submit</span>
+                                    <i class="uil uil-navigator"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+       
+    
+    
+    <script src="{% static 'vendor/chart.js/chart.umd.js' %}"></script>
+    <script src="{% static 'vendor/echarts/echarts.min.js' %}"></script>
+    
+
+
+   
+    <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/draggable/1.1.0/draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+
+    
+    
+    <script>
+        function toggleProfileSection() {
+            var profileSection = document.querySelector('.profile1-section');
+            profileSection.classList.toggle('hidden');
+        }
+    </script>
+    
+    
+    <script>
+        
+        function toggleProfile() {
+            var profileSection = document.getElementById("profileSection");
+            profileSection.style.display = (profileSection.style.display === "block") ? "none" : "block";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            toggleProfile();
+        });
+
+        
+    </script>
+    <script>
+        function bulgeIcon(icon) {
+            icon.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                icon.style.transform = 'scale(1)';
+            }, 300);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatDate(date) {
+                const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+                return new Intl.DateTimeFormat('en-US', options).format(date);
+            }
+            const currentDate = new Date();
+            document.getElementById('welcomeDate').textContent = formatDate(currentDate);
+        });
+    </script>
+    <script>
+        var barGraphData = {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [{
+                label: 'Monthly Sales',
+                backgroundColor: '#8DA9C4',
+                data: [50, 70, 120, 90, 110],
+            }]
+        };
+        var barGraphOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        };
+        var barGraphCanvas = document.getElementById('barGraph').getContext('2d');
+        new Chart(barGraphCanvas, {
+            type: 'bar',
+            data: barGraphData,
+            options: barGraphOptions
+        });
+
+        
+        var labelsFull = ['Customers', 'Leads', 'Opportunities', 'Contacts', 'Accounts'];
+        var labelsShort = ['Cust.', 'Leads', 'Opps', 'Cont', 'Accts'];
+
+        function setLabels() {
+            var screenWidth = window.innerWidth;
+            if (screenWidth <= 575) {
+                return labelsShort;
+            } else {
+                return labelsFull; 
+            }
+        }
+
+        var doughnutChartData = {
+            labels: setLabels(), 
+            datasets: [{
+                data: [15, 25, 20, 10, 15],
+                backgroundColor: ['#0B2545', '#8DA9C4', '#13315C', '#134074','#EEF4ED'],
+            }]
+        };
+
+        // var doughnutChartData = {
+        //     labels: ['Cust.', 'Leads', 'Opps', 'Contacts', 'Accts'],
+        //     datasets: [{
+        //         data: [15, 25, 20, 10, 15, 15],
+        //         backgroundColor: ['#0B2545', '#8DA9C4', '#13315C', '#134074','#EEF4ED'],
+        //     }]
+        // };
+        var doughnutChartOptions = {
+            responsive: true,
+            cutout: '80',
+            layout: {
+                padding: {
+                    top: 20 
+                }
+            }
+        };
+        var doughnutChartCanvas = document.getElementById('doughnutChart').getContext('2d');
+        new Chart(doughnutChartCanvas, {
+            type: 'doughnut',
+            data: doughnutChartData,
+            options: doughnutChartOptions
+        });
+    </script>
+   
+    <script>
+        function animateMessage() {
+            var chatbox = document.getElementById("chatbox");
+            chatbox.style.display = "block";
+            chatbox.classList.add("slide-in");
+        }
+
+        function closeChatbox() {
+            var chatbox = document.getElementById("chatbox");
+            chatbox.style.display = "none";
+            chatbox.classList.remove("slide-in");
+        }
+
+        function sendMessage() {
+            var messageInput = document.getElementById("message-input");
+            var message = messageInput.value;
+
+            if (message.trim() !== "") {
+                var chatMessages = document.getElementById("chat-messages");
+                var newMessage = document.createElement("div");
+                newMessage.textContent = message;
+                chatMessages.appendChild(newMessage);
+                messageInput.value = "";
+            }
+        }
+
+    </script>
+    
+    <script>
+        let isDragging = false;
+        let startX;
+        const scrollingLine = document.querySelector('.scheduler-card .scrolling-line');
+        const roundIndicator = document.querySelector('.scheduler-card .round-indicator');
+
+        roundIndicator.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX;
+            scrollingLine.style.transition = 'none';
+            roundIndicator.style.transition = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const offsetX = e.pageX - startX;
+            const newLeft = Math.max(0, roundIndicator.offsetLeft + offsetX);
+            roundIndicator.style.left = `${newLeft}px`;
+            startX = e.pageX;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                scrollingLine.style.transition = 'background-color 0.3s';
+                roundIndicator.style.transition = 'left 0.3s';
+                isDragging = false;
+            }
+        });
+
+
+
+        const headings = document.querySelectorAll('.heading');
+        headings.forEach(heading => {
+            heading.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+    
+            heading.addEventListener('drop', (e) => {
+                e.preventDefault();
+                if (isDragging) {
+                    const destinationHeading = heading;
+                    destinationHeading.appendChild(draggedCard);
+                    isDragging = false;
+                }
+            });
+        });
+    
+        function dragStart(e) {
+            isDragging = true;
+            startX = e.pageX;
+            draggedCard = e.target;
+            e.dataTransfer.effectAllowed = 'move';
+        }
+    
+        function dragMove(e) {
+            if (isDragging) {
+                const offsetX = e.pageX - startX;
+                const rotation = offsetX / 5; 
+                draggedCard.style.transform = `translateX(${offsetX}px) rotate(${rotation}deg)`;
+            }
+        }
+    
+        function dragEnd() {
+            if (isDragging) {
+                draggedCard.style.transform = 'none';
+                isDragging = false;
+            }
+        }
+    
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('dragstart', dragStart);
+            card.addEventListener('drag', dragMove);
+            card.addEventListener('dragend', dragEnd);
+        });
+    </script>
+    <script>
+        function loadHomePage() {
+            window.location.href = '/';
+        }
+    
+        var selectedIcon = null;
+    
+        function chooseIcon(element) {
+            if (selectedIcon) {
+                selectedIcon.classList.remove('active');
+            }
+            element.classList.add('active');
+            selectedIcon = element;
+    
+            var iconClass = element.querySelector('i').classList;
+    
+            switch (true) {
+                case iconClass.contains('bi-grid'):
+                    window.location.href = '/';
+                    break;
+                case iconClass.contains('bi-journal-text'):
+                    window.location.href = 'users'; 
+                    break;
+                case iconClass.contains('bi-envelope'):
+                    break;
+                case iconClass.contains('bi-card-list'):
+                    break;
+                case iconClass.contains('bi-box-arrow-in-right'):
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+            legend: {
+              data: ['Allocated Budget', 'Actual Spending']
+            },
+            radar: {
+              // shape: 'circle',
+              indicator: [{
+                  name: 'Sales',
+                  max: 6500
+                },
+                {
+                  name: 'Administration',
+                  max: 16000
+                },
+                {
+                  name: 'Information Technology',
+                  max: 30000
+                },
+                {
+                  name: 'Customer Support',
+                  max: 38000
+                },
+                {
+                  name: 'Development',
+                  max: 52000
+                },
+                {
+                  name: 'Marketing',
+                  max: 25000
+                }
+              ]
+            },
+            series: [{
+              name: 'Budget vs spending',
+              type: 'radar',
+              data: [{
+                  value: [4200, 3000, 20000, 35000, 50000, 18000],
+                  name: 'Allocated Budget'
+                },
+                {
+                  value: [5000, 14000, 28000, 26000, 42000, 21000],
+                  name: 'Actual Spending'
+                }
+              ]
+            }]
+          });
+        });
+    </script>
+    
+    
+    
+    
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css">
+
+  <style>
+    body {
+        margin: 0;
+        font-family: 'Pacifico',cursive;
+        font-weight: bold;
+        
+    }
+   
+    .navbar {
+        background-color: #ffffff;
+        overflow: hidden;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .company-name,
+    .sales,
+    .developing,
+    .learning {
+        display: inline-block;
+        margin-right: 20px;
+        color: #333333;
+        text-decoration: none;
+        font-size: 18px; 
+    }
+
+    .search-input {
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .search-icon {
+        padding: 8px;
+        background-color: #333333;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .box {
+       
+        padding: 10px;
+        width: 2000px;
+        height: 100%;
+        overflow: auto;
+        background-color: #EEF4ED;
+        
+    }
+
+    .box h2 {
+        text-align: left;
+        margin-bottom: 20px;
+        color: #333;
+        margin-left: 20px;
+        display: inline-block;
+        display: inline-block;
+        font-weight: normal;
+        font-size: 20px; 
+        
+    }
+
+        
+    .card {
+        background-color: #ffffff;
+        border: 1px solid #ffffff;
+        padding: 8px;
+        cursor: move;
+        width: 300px;
+        height: 180px;
+        margin-left: 9px;
+    }
+
+    .card:nth-child(odd) {
+        border-left: 5px solid #13315C;
+    }
+
+    .card:nth-child(even) {
+        border-left: 5px solid #8DA9C4;
+    }
+
+    .card-content {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .card-heading {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .project-description {
+        margin-top: 5px;
+        color: #555;
+    }
+
+    .deco-text {
+        color: #333;
+    }
+
+    .oval-button {
+        width: 55px;
+        height: 20px;
+        background-color: #0B2545;
+        margin-top: 5px;
+        margin-right: 2px;
+    }
+
+    .button-text {
+        color: #ffffff;
+    }
+
+    .yellow-stars {
+        margin-top: 5px;
+        color: yellow;
+    }
+
+    .letter-box {
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+    }
+
+    .container {
+        font-family: 'Pacifico', cursive;
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        background-color: #8DA9C4;
+        margin: 0;
+        height: 100vh;
+    }
+
+       
+
+    .trash-icon {
+        position: relative; 
+        font-size: 32px;
+        color: #e74c3c;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+        bottom: 29px;
+        margin-left: 1000px;
+
+    } 
+
+ .trash-box {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 300px;
+        max-height: 400px;
+        background-color: #8DA9C4;
+        border: 2px solid #0B2545;
+        overflow-y: auto;
+        display: none;
+        transition: transform 0.3s ease-in-out;
+        transform-origin: bottom right;
+        border-radius: 10px;
+        animation: bounceInUp 0.5s ease-in-out;
+        z-index: 5;
+    }
+
+    .trash-box h3 {
+        color: #ffffff;
+        background-color: #0B2545;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 0;
+        font-size: small;
+    }
+
+    .trash-box .undo-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #0B2545;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .trash-box .undo-button:hover {
+        background-color: #11365f;
+    }
+    #sidebar {
+        background-color: #134074; 
+        width: 250px;
+    }
+
+    #sidebar .nav-item a {
+        color: white;
+        margin-left: 20px;
+    
+    }
+
+    @keyframes bounceInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    }
+
+    @keyframes dustbinAnimation {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(10deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+    }
+    .card-options {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 1.5em; 
+    }
+
+    .card-options:hover {
+        color: #3498db;   
+    }
+
+    @media only screen and (max-width: 767px) {
+        .navbar {
+            padding: 10px;
+        }
+
+        .company-name,
+        .sales,
+        .developing,
+        .learning {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .search-input,
+        .search-icon {
+            margin-top: 10px;
+        }
+
+        .trash-icon {
+            margin-left: 10px;
+        }
+
+        .box h2 {
+            margin-left: 10px;
+        }
+
+        .card {
+            margin-left: 0;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+        .navbar {
+            padding: 15px;
+        }
+
+        .company-name,
+        .sales,
+        .developing,
+        .learning {
+            display: block;
+            margin: 15px 0; 
+        }
+
+        .search-input,
+        .search-icon {
+            margin-top: 15px;
+        }
+
+        .trash-icon {
+            margin-left: 15px; 
+        }
+
+        .box h2 {
+            margin-left: 15px;
+        }
+
+        .card {
+            margin-left: 0;
+            
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .navbar {
+            padding: 10px;
+        }
+
+        .company-name,
+        .sales,
+        .developing,
+        .learning {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .search-input,
+        .search-icon {
+            margin-top: 10px;
+        }
+
+        .trash-icon {
+            margin-left: 10px;
+        }
+
+        .box h2 {
+            margin-left: 10px;
+        }
+
+        .card {
+            margin-left: 0;
+        }   
+    }
+
+    @media only screen and (max-width: 575px) {
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            height: auto;
+        }
+        .navbar {
+            padding: 10px;
+            
+        }
+        .search-input,
+        .search-icon {
+            margin-top: 10px;
+            
+        }
+        .trash-icon {
+            margin-left: 10px;
+        }
+
+        .box {
+            width: calc(100% - 2px);
+        }
+
+        .box h2 {
+            margin-left: 10px;
+        }
+
+        .card {
+            margin-left: 0;
+            margin-bottom: 10px; 
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .box:nth-child(odd) .card {
+            border-left: 5px solid #13315C;
+        }
+
+        .box:nth-child(even) .card {
+            border-left: 5px solid #8DA9C4;
+        }  
+    }
+
+
+  
+
+</style>
+</head>
+
+<body>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">CRMSystem</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+                You have 4 new CRM notifications
+                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+          <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                  <h4>New Lead Assigned</h4>
+                  <p>A new lead has been assigned to you. Please review and follow up.</p>
+                  <p>30 min. ago</p>
+              </div>
+          </li>
+          
+            <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                    <h4>New Lead Assigned</h4>
+                    <p>A new lead has been assigned to you. Please review and follow up.</p>
+                    <p>30 min. ago</p>
+                </div>
+            </li>
+        
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="notification-item">
+                <i class="bi bi-x-circle text-danger"></i>
+                <div>
+                    <h4>Task Deadline Missed</h4>
+                    <p>The deadline for a task has passed. Take necessary actions.</p>
+                    <p>1 hr. ago</p>
+                </div>
+            </li>
+        
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="notification-item">
+                <i class="bi bi-check-circle text-success"></i>
+                <div>
+                    <h4>Deal Closed</h4>
+                    <p>Congratulations! A deal has been successfully closed.</p>
+                    <p>2 hrs. ago</p>
+                </div>
+            </li>
+        
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                <div>
+                    <h4>Meeting Reminder</h4>
+                    <p>You have a scheduled meeting in the next hour. Be prepared!</p>
+                    <p>4 hrs. ago</p>
+                </div>
+            </li>
+        
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+                <a href="#">Show all CRM notifications</a>
+            </li>
+        </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+                You have 3 new CRM messages
+                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="message-item">
+                <a href="#">
+                    <img src="{% static 'img/message-1.jpg' %}" alt="" class="rounded-circle">
+                    <div>
+                        <h4>New Lead Inquiry</h4>
+                        <p>Maria Hudson is interested in your product. Contact her for more details.</p>
+                        <p>4 hrs. ago</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="message-item">
+                <a href="#">
+                    <img src="{% static 'img/message-2.jpg' %}" alt="" class="rounded-circle">
+                    <div>
+                        <h4>Task Update</h4>
+                        <p>Anna Nelson has provided an update on the ongoing task. Review the changes.</p>
+                        <p>6 hrs. ago</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="message-item">
+                <a href="#">
+                    <img src="{% static 'img/message-3.jpg' %}" alt="" class="rounded-circle">
+                    <div>
+                        <h4>Meeting Confirmation</h4>
+                        <p>David Muldon has confirmed the upcoming meeting. Prepare the agenda.</p>
+                        <p>8 hrs. ago</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+        
+            <li class="dropdown-footer">
+                <a href="#">Show all CRM messages</a>
+            </li>
+        </ul>
+        </li>
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="{% static 'images/edit.jpg' %}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Aiswarya Ajith</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Aiswarya Ajith</h6>
+              <span>CRM Specialist</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'users' %}">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'users' %}">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href=#>
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </header>
+
+
+  <aside id="sidebar" class="sidebar">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+  </aside>
+
+  <main id="main" class="main">
+    <div class="trash-icon" onclick="toggleTrashBox()">&#128259;</div>
+    <div id="trashBox" class="trash-box">
+        <h3>Trash Box 🗑️</h3>
+        <div id="trashedCards"></div>
+        <button id="undoButton" class="undo-button" onclick="undoChanges()">Undo Changes</button>
+    </div>
+    <div class="container">
+      <div class="box" id="box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <h2>New <span style="font-size: 1.0em;"></span></h2>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-options" onclick="showCardOptions(this)">&hellip;</div>
+              <div class="card-content">
+                  <div class="card-heading">Marketing Campaign</div>
+                  $10,000 <br>
+                  <span style="color: #333;">Marketing Solutions Inc.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★☆ <br>
+                  📬 Email Campaign <br>
+              </div>
+          </div>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Product Launch</div>
+                  $15,000 <br>
+                  <span style="color: #333;">Tech Innovators Co.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★★ <br>
+                  📬 Social Media Blitz <br>
+              </div>
+          </div>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Branch Renovation</div>
+                  $25,000 <br>
+                  <span style="color: #333;">Global Investments Corp.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★☆ <br>
+                  📬 Modernizing Infrastructure <br>
+              </div>
+          </div>
+      </div>
+  
+      <div class="box" id="box2" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <h2>Branch <span style="font-size: 1.0em;"></span></h2>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Branch Expansion</div>
+                  $20,000 <br>
+                  <span style="color: #333;">Global Investments Corp.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★☆ <br>
+                  📬 New Office Setup <br>
+              </div>
+          </div>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Product Demo</div>
+                  $15,000 <br>
+                  <span style="color: #333;">Tech Innovators Co.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★★ <br>
+                  📬 Interactive Demo <br>
+              </div>
+          </div>
+         
+      </div>
+      <div class="box" id="box3" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <h2>Developing <span style="font-size: 1.0em;"></span></h2>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Product Enhancement</div>
+                  $8,000 <br>
+                  <span style="color: #333;">Tech Innovators Co.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★★ <br>
+                  📬 Feature Upgrades <br>
+              </div>
+          </div>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Customer Survey</div>
+                  $5,000 <br>
+                  <span style="color: #333;">Market Research Ltd.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★★ <br>
+                  📬 Feedback Collection <br>
+              </div>
+          </div>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Training Program</div>
+                  $12,000 <br>
+                  <span style="color: #333;">Learning Solutions Ltd.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★☆ <br>
+                  📬 Employee Training <br>
+              </div>
+          </div>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Website Redesign</div>
+                  $8,500 <br>
+                  <span style="color: #333;">Web Design Co.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★☆ <br>
+                  📬 UX/UI Improvements <br>
+              </div>
+          </div>
+      </div>
+      <div class="box" id="box4" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <h2>Learning <span style="font-size: 1.0em;"></span></h2>
+          <div class="card" draggable="true" ondragstart="drag(event)">
+              <div class="card-content">
+                  <div class="card-heading">Skill Development</div>
+                  $6,000 <br>
+                  <span style="color: #333;">Learning Solutions Ltd.</span> <br>
+                  <div class="oval-button">
+                      <span class="button-text">Details</span>
+                  </div> <br>
+                  ★★★★★ <br>
+                  📬 Online Courses <br>
+              </div>
+          </div>
+      </div>
+  </div>
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script src="{% static 'vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    let isDragging = false;
+    let startX;
+    let draggedCard;
+    let trashedCards = [];
+
+    const trashBox = document.getElementById('trashBox');
+    const trashedCardsContainer = document.getElementById('trashedCards');
+
+    function toggleTrashBox() {
+        trashBox.style.display = (trashBox.style.display === 'none' || trashBox.style.display === '') ? 'block' : 'none';
+    }
+
+    function updateTrashBox() {
+        trashedCardsContainer.innerHTML = '';
+        trashedCards.forEach(card => {
+            trashedCardsContainer.appendChild(card);
+        });
+    }
+
+    function undoChanges() {
+        if (trashedCards.length > 0) {
+            const cardToUndo = trashedCards.pop();
+            const originalBoxId = cardToUndo.dataset.originalBox; 
+            document.getElementById(originalBoxId).appendChild(cardToUndo);
+            updateTrashBox();
+
+            cardToUndo.addEventListener('dragstart', dragStart);
+            cardToUndo.addEventListener('drag', dragMove);
+            cardToUndo.addEventListener('dragend', dragEnd);
+        }
+    }
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+        box.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        box.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (isDragging) {
+                const destinationBox = box;
+                destinationBox.appendChild(draggedCard);
+                isDragging = false;
+            }
+        });
+    });
+    function dragStart(e) {
+        isDragging = true;
+        startX = e.pageX;
+        draggedCard = e.target;
+        e.dataTransfer.effectAllowed = 'move';
+
+        
+        toggleTrashBox();
+
+        draggedCard.dataset.originalBox = draggedCard.parentElement.id;
+    }
+    function dragMove(e) {
+        if (isDragging) {
+            const offsetX = e.pageX - startX;
+            const rotation = offsetX / 5;
+        }
+    }
+    function dragEnd() {
+        if (isDragging) {
+            draggedCard.style.transition = 'none'; 
+            draggedCard.style.transform = 'none';
+            trashedCards.push(draggedCard.cloneNode(true));
+            draggedCard.parentElement.removeChild(draggedCard); 
+            updateTrashBox();
+            setTimeout(() => {
+                draggedCard.style.transition = '';  
+            }, 0);
+            isDragging = false;
+
+            toggleTrashBox();
+        }
+    }
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('drag', dragMove);
+        card.addEventListener('dragend', dragEnd);
+    });
+    function toggleTrashBox() {
+        const trashBox = document.getElementById('trashBox');
+        const isHidden = trashBox.style.display === 'none' || trashBox.style.display === '';
+
+        trashBox.style.display = isHidden ? 'block' : 'none';
+
+        if (!isHidden) {
+            trashBox.classList.add('animated');
+        } else {
+            setTimeout(() => {
+                trashBox.classList.remove('animated');
+            }, 500);
+        }
+    }
+</script>
+<script>
+    function showCardOptions(optionsButton) {
+        alert("Option menu for deletion will be shown here");
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    let isDragging = false;
+    let startX;
+    let draggedCard;
+    let trashedCards = [];
+
+    const trashBox = document.getElementById('trashBox');
+    const trashedCardsContainer = document.getElementById('trashedCards');
+    const undoButton = document.getElementById('undoButton');
+
+    function toggleTrashBox() {
+        const isHidden = trashBox.style.display === 'none' || trashBox.style.display === '';
+        trashBox.style.display = isHidden ? 'block' : 'none';
+
+        if (!isHidden) {
+            trashBox.classList.add('animated');
+        } else {
+            setTimeout(() => {
+                trashBox.classList.remove('animated');
+            }, 500);
+        }
+    }
+
+    function updateTrashBox() {
+        trashedCardsContainer.innerHTML = '';
+        trashedCards.forEach(card => {
+            trashedCardsContainer.appendChild(card);
+        });
+    }
+
+    function undoChanges() {
+    console.log("Undo button clicked");
+
+        if (trashedCards.length > 0) {
+            const cardToUndo = trashedCards.pop();
+            const originalBoxId = cardToUndo.dataset.originalBox;
+
+            console.log("Card to undo:", cardToUndo);
+            console.log("Original box ID:", originalBoxId);
+
+            cardToUndo.removeEventListener('click', cardClick);
+            cardToUndo.removeEventListener('touchstart', touchStart);
+            cardToUndo.removeEventListener('touchmove', touchMove);
+            cardToUndo.removeEventListener('touchend', touchEnd);
+
+            const originalBox = document.getElementById(originalBoxId);
+
+            console.log("Original box:", originalBox);
+
+            originalBox.appendChild(cardToUndo);
+
+            console.log("Card appended back to the original box");
+
+            cardToUndo.addEventListener('click', cardClick);
+            cardToUndo.addEventListener('touchstart', touchStart);
+            cardToUndo.addEventListener('touchmove', touchMove);
+            cardToUndo.addEventListener('touchend', touchEnd);
+
+            updateTrashBox();
+        }
+    }
+
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+        box.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        box.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (isDragging) {
+                const destinationBox = box;
+                destinationBox.appendChild(draggedCard);
+                isDragging = false;
+                toggleTrashBox();
+            }
+        });
+    });
+    function touchStart(e) {
+        if (e.cancelable) {
+            e.preventDefault();
+        }
+
+        isDragging = true;
+        startX = e.touches[0].pageX;
+        draggedCard = e.target;
+        draggedCard.style.transition = 'none';
+
+        toggleTrashBox();
+
+        draggedCard.dataset.originalBox = draggedCard.parentElement.id;
+    }
+    function touchMove(e) {
+        if (isDragging) {
+            const offsetX = e.touches[0].pageX - startX;
+            const rotation = offsetX / 5;
+
+            e.preventDefault();
+        }
+    }
+    function touchEnd() {
+        if (isDragging) {
+            draggedCard.style.transition = '';
+            const clonedCard = draggedCard.cloneNode(true);
+            trashedCards.push(clonedCard);
+            draggedCard.parentElement.removeChild(draggedCard);
+            updateTrashBox();
+
+            clonedCard.removeEventListener('touchstart', touchStart);
+            clonedCard.removeEventListener('touchmove', touchMove);
+            clonedCard.removeEventListener('touchend', touchEnd);
+            clonedCard.addEventListener('click', cardClick);
+
+            setTimeout(() => {
+                clonedCard.style.transform = 'none';
+            }, 0);
+
+            isDragging = false;
+        }
+    }
+    function cardClick() {
+        const clonedCard = this.cloneNode(true);
+        trashedCards.push(clonedCard);
+        this.parentElement.removeChild(this);
+        updateTrashBox();
+    }
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('touchstart', touchStart);
+        card.addEventListener('touchmove', touchMove);
+        card.addEventListener('touchend', touchEnd);
+        card.addEventListener('click', cardClick); 
+    });
+    undoButton.addEventListener('click', undoChanges);
+
+    function showCardOptions(optionsButton) {
+        alert("Option menu for deletion will be shown here");
+    }
+});
+
+</script>
+</body>
+</html>
